@@ -20,24 +20,27 @@ class PrintContextUi extends connect(store)(LitElement) {
     ]
   }
 
-  render() {}
+  render() {
+    html`
+      <ul>
+        ${this.printers.map(ptiner => {
+          html`
+            <li>${printer}</li>
+          `
+        })}
+      </ul>
+    `
+  }
 
   updated(changedProps) {
-    if (changedProps.has('_printable')) {
-      store.dispatch({
-        type: APPEND_FOOTERBAR,
-        position: TOOL_POSITION.FRONT,
-        template: html`
-          <mwc-icon @click="${this._toastSelector}">print</mwc-icon>
-        `
-      })
-
-      console.log(this._printable)
+    if (changedProps.has('_show')) {
+      console.log('show')
     }
   }
 
   stateChanged(state) {
-    this._printable = state.route.context.printable || false
+    this._show = state.print.show
+    this._printers = state.print.printers
   }
 }
 
