@@ -11,6 +11,7 @@
     "build:client": "webpack --config node_modules/@things-factory/shell/webpack.config.js"
   },
   "dependencies": {
+    "@things-factory/layout-base": "*",
     "@things-factory/print-base": "*",
     "@things-factory/shell": "*"
   },
