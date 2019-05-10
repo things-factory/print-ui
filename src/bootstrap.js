@@ -2,8 +2,6 @@ import { store } from '@things-factory/shell'
 import { html } from 'lit-html'
 import { UPDATE_PRINTER } from '@things-factory/print-base'
 
-import './layouts/print-context-ui'
-
 import { APPEND_FOOTERBAR, TOGGLE_OVERLAY, TOOL_POSITION } from '@things-factory/layout-base'
 
 function toggleOverlayTemplate() {
@@ -16,6 +14,8 @@ function toggleOverlayTemplate() {
 }
 
 export default function bootstrap() {
+  import('./layouts/print-context-ui')
+
   store.dispatch({
     type: APPEND_FOOTERBAR,
     footer: {
