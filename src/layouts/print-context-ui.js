@@ -1,13 +1,11 @@
-import { connect } from 'pwa-helpers/connect-mixin'
-import { LitElement, html, css } from 'lit-element'
-
 import { store } from '@things-factory/shell'
-import { APPEND_FOOTERBAR, TOOL_POSITION } from '@things-factory/layout-base'
+import { css, html, LitElement } from 'lit-element'
+import { connect } from 'pwa-helpers/connect-mixin'
 
 class PrintContextUi extends connect(store)(LitElement) {
   static get properties() {
     return {
-      _printable: Boolean
+      _printers: Array
     }
   }
 
@@ -23,7 +21,7 @@ class PrintContextUi extends connect(store)(LitElement) {
   render() {
     html`
       <ul>
-        ${this.printers.map(ptiner => {
+        ${this._printers.map(printer => {
           html`
             <li>${printer}</li>
           `
@@ -32,14 +30,7 @@ class PrintContextUi extends connect(store)(LitElement) {
     `
   }
 
-  updated(changedProps) {
-    if (changedProps.has('_show')) {
-      console.log('show')
-    }
-  }
-
   stateChanged(state) {
-    this._show = state.print.show
     this._printers = state.print.printers
   }
 }
