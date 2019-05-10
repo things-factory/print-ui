@@ -4,6 +4,8 @@ import { UPDATE_PRINTER } from '@things-factory/print-base'
 
 import { APPEND_FOOTERBAR, TOGGLE_OVERLAY, TOOL_POSITION } from '@things-factory/layout-base'
 
+import '@material/mwc-icon/mwc-icon'
+
 function toggleOverlayTemplate() {
   store.dispatch({
     type: TOGGLE_OVERLAY,
