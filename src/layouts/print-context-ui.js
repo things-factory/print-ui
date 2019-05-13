@@ -1,11 +1,9 @@
-import { connect } from 'pwa-helpers/connect-mixin'
-import { store } from '@things-factory/shell'
-import { LitElement, html, css } from 'lit-element'
-
-import { TOGGLE_OVERLAY } from '@things-factory/layout-base'
-
-import '@material/mwc-icon/mwc-icon'
 import '@material/mwc-button/mwc-button'
+import '@material/mwc-icon/mwc-icon'
+import { TOGGLE_OVERLAY } from '@things-factory/layout-base'
+import { store } from '@things-factory/shell'
+import { css, html, LitElement } from 'lit-element'
+import { connect } from 'pwa-helpers/connect-mixin'
 
 class PrintContextUi extends connect(store)(LitElement) {
   static get properties() {
@@ -18,18 +16,25 @@ class PrintContextUi extends connect(store)(LitElement) {
     return [
       css`
         :host {
-          display: block;
+          display: flex;
+          flex-direction: column;
           margin: auto 0 0 0;
+          max-height: 30vh;
+          background-color: #cf4545;
         }
         ul {
           margin: 0;
           padding: 0;
-          background-color: #cf4545;
-          color: white;
+          color: #fff;
           list-style: none;
+          height: 100%;
+          overflow-y: auto;
         }
         li {
           display: flex;
+        }
+        li > mwc-icon {
+          padding: 10px;
         }
         li > span {
           margin: auto 0 auto 0;
@@ -38,8 +43,9 @@ class PrintContextUi extends connect(store)(LitElement) {
         li > input {
           margin: auto 10px;
         }
-        ul > span {
-          padding: 15px;
+        mwc-button {
+          margin-right: auto;
+          padding: 0 10px;
         }
       `
     ]
@@ -49,16 +55,18 @@ class PrintContextUi extends connect(store)(LitElement) {
     return html`
       <ul>
         ${this._printers.map(
-          printer => html`
-            <li>
-              <mwc-icon style="padding: 10px; background-color: #CF4545; color: white;">print</mwc-icon>
-              <span>${printer}</span>
-              <input type="radio" name="print" />
-            </li>
+          (printer, idx) => html`
+            <label for="${idx}">
+              <li>
+                <mwc-icon>print</mwc-icon>
+                <span>${printer}</span>
+                <input id="${idx}" type="radio" name="print" />
+              </li>
+            </label>
           `
         )}
-        <mwc-button @click="${this._onPrintOut}">Print...</mwc-button>
       </ul>
+      <mwc-button @click="${this._onPrintOut}">Print to...</mwc-button>
     `
   }
 
@@ -66,8 +74,8 @@ class PrintContextUi extends connect(store)(LitElement) {
     this._printers = state.print.printers
   }
 
-  _onPrintOut() {
-    console.log('print out')
+  _onPrintOut(event) {
+    console.log('print out', event)
     store.dispatch({
       type: TOGGLE_OVERLAY
     })
