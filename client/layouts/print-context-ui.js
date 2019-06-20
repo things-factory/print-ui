@@ -62,13 +62,11 @@ class PrintContextUi extends connect(store)(LitElement) {
         ? [printable.accept]
         : null
 
-    for (let printer in this._printers) {
+    this._printers.forEach(printer => {
       if (!accept || accept.indexOf(printer.type) != -1) {
-        printers.push(type)
+        printers.push(printer)
       }
-    }
-
-    this.type = printers.length > 0 ? printers[0] : null
+    })
 
     return html`
       <ul>
