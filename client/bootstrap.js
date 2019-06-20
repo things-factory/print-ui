@@ -31,9 +31,29 @@ export default function bootstrap() {
     }
   })
 
-  console.log('UPDATE_PRINTER test code')
   store.dispatch({
     type: UPDATE_PRINTER,
-    printer: ['HP DesignJet 60 Z6610', 'CANON IR ADV C5550i II', 'EPSON aculaser-C9300N A3']
+    printer: [
+      {
+        type: 'paper',
+        name: 'HP DesignJet 60 Z6610'
+      },
+      {
+        type: 'paper',
+        name: 'CANON IR ADV C5550i II'
+      },
+      {
+        type: 'paper',
+        name: 'EPSON aculaser-C9300N A3'
+      },
+      {
+        type: 'label',
+        name: 'Zebra ZT800-EPL'
+      },
+      {
+        type: '3d',
+        name: '3D Printer XYZ'
+      }
+    ]
   })
 }

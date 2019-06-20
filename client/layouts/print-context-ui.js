@@ -8,6 +8,7 @@ import { connect } from 'pwa-helpers/connect-mixin'
 class PrintContextUi extends connect(store)(LitElement) {
   static get properties() {
     return {
+      _context: Object,
       _printers: Array
     }
   }
@@ -52,26 +53,48 @@ class PrintContextUi extends connect(store)(LitElement) {
   }
 
   render() {
+    const printers = []
+    const printable = this._context.printable || {}
+    const accept =
+      printable.accept instanceof Array
+        ? printable.accept
+        : typeof printable.accept == 'string'
+        ? [printable.accept]
+        : null
+
+    for (let printer in this._printers) {
+      if (!accept || accept.indexOf(printer.type) != -1) {
+        printers.push(type)
+      }
+    }
+
+    this.type = printers.length > 0 ? printers[0] : null
+
     return html`
       <ul>
-        ${this._printers.map(
-          (printer, idx) => html`
-            <label for="${idx}">
-              <li>
-                <mwc-icon>print</mwc-icon>
-                <span>${printer}</span>
-                <input id="${idx}" type="radio" name="print" />
-              </li>
-            </label>
-          `
-        )}
+        ${printers
+          .sort((p1, p2) => {
+            p1.name > p2.name ? 1 : 0
+          })
+          .map(
+            (printer, idx) => html`
+              <label for="${idx}">
+                <li>
+                  <mwc-icon>print</mwc-icon>
+                  <span>${printer.name} (${printer.type})</span>
+                  <input id="${idx}" type="radio" name="print" />
+                </li>
+              </label>
+            `
+          )}
       </ul>
-      <mwc-button @click="${this._onPrintOut}">Print to...</mwc-button>
+      <mwc-button @click=${this._onPrintOut.bind(this)}>Print to...</mwc-button>
     `
   }
 
   stateChanged(state) {
     this._printers = state.print.printers
+    this._context = state.route.context
   }
 
   _onPrintOut(event) {
