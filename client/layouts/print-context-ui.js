@@ -4,7 +4,7 @@ import { connect } from 'pwa-helpers/connect-mixin'
 import '@material/mwc-button/mwc-button'
 import '@material/mwc-icon/mwc-icon'
 
-import { store } from '@things-factory/shell'
+import { store, ScrollbarStyles } from '@things-factory/shell'
 import { TOGGLE_OVERLAY } from '@things-factory/layout-base'
 import { print } from '@things-factory/print-base'
 
@@ -18,6 +18,7 @@ class PrintContextUi extends connect(store)(LitElement) {
 
   static get styles() {
     return [
+      ScrollbarStyles,
       css`
         :host {
           display: flex;
