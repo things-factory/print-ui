@@ -109,16 +109,21 @@ class PrintContextUi extends connect(store)(LitElement) {
     this._context = state.route.context
   }
 
-  _onPrintOut(event) {
+  async _onPrintOut(event) {
     if (!this._printer) {
       return
     }
 
-    print(this._printer, this._context.printable)
-
     store.dispatch({
       type: TOGGLE_OVERLAY
     })
+
+    /* TODO 실제 오버레이가 사라질 때를 확인하는 방법을 구하시오. */
+    await this.updateComplete
+    await this.updateComplete
+    await this.updateComplete
+
+    print(this._printer, this._context.printable)
   }
 }
 
