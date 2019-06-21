@@ -1,9 +1,12 @@
-import '@material/mwc-button/mwc-button'
-import '@material/mwc-icon/mwc-icon'
-import { TOGGLE_OVERLAY } from '@things-factory/layout-base'
-import { store } from '@things-factory/shell'
 import { css, html, LitElement } from 'lit-element'
 import { connect } from 'pwa-helpers/connect-mixin'
+
+import '@material/mwc-button/mwc-button'
+import '@material/mwc-icon/mwc-icon'
+
+import { store } from '@things-factory/shell'
+import { TOGGLE_OVERLAY } from '@things-factory/layout-base'
+import { print } from '@things-factory/print-base'
 
 class PrintContextUi extends connect(store)(LitElement) {
   static get properties() {
@@ -68,6 +71,8 @@ class PrintContextUi extends connect(store)(LitElement) {
       }
     })
 
+    this._printer = printers.length > 0 ? printers[0] : null
+
     return html`
       <ul>
         ${printers
@@ -80,7 +85,15 @@ class PrintContextUi extends connect(store)(LitElement) {
                 <li>
                   <mwc-icon>print</mwc-icon>
                   <span>${printer.name} (${printer.type})</span>
-                  <input id="${idx}" type="radio" name="print" />
+                  <input
+                    id="${idx}"
+                    type="radio"
+                    name="print"
+                    @change="${() => {
+                      this._printer = printer
+                    }}"
+                    ?checked="${idx === 0}"
+                  />
                 </li>
               </label>
             `
@@ -96,7 +109,12 @@ class PrintContextUi extends connect(store)(LitElement) {
   }
 
   _onPrintOut(event) {
-    console.log('print out', event)
+    if (!this._printer) {
+      return
+    }
+
+    print(this._printer, this._context.printable)
+
     store.dispatch({
       type: TOGGLE_OVERLAY
     })
