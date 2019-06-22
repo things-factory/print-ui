@@ -31,6 +31,7 @@ export default function bootstrap() {
     }
   })
 
+  /* TODO move to test module */
   store.dispatch({
     type: UPDATE_PRINTER,
     printer: [

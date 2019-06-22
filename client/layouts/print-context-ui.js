@@ -7,6 +7,7 @@ import '@material/mwc-icon/mwc-icon'
 import { store, ScrollbarStyles } from '@things-factory/shell'
 import { TOGGLE_OVERLAY } from '@things-factory/layout-base'
 import { print } from '@things-factory/print-base'
+import { i18next } from '@things-factory/i18n-base'
 
 class PrintContextUi extends connect(store)(LitElement) {
   static get properties() {
@@ -123,7 +124,30 @@ class PrintContextUi extends connect(store)(LitElement) {
     await this.updateComplete
     await this.updateComplete
 
-    print(this._printer, this._context.printable)
+    try {
+      var result = await print(this._printer, this._context.printable)
+
+      document.dispatchEvent(
+        new CustomEvent('notify', {
+          detail: {
+            type: 'info',
+            message: i18next.t('text.printed', {
+              result
+            })
+          }
+        })
+      )
+    } catch (e) {
+      document.dispatchEvent(
+        new CustomEvent('notify', {
+          detail: {
+            type: 'error',
+            message: e,
+            e
+          }
+        })
+      )
+    }
   }
 }
 
