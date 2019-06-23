@@ -1,10 +1,10 @@
-import { store } from '@things-factory/shell'
 import { html } from 'lit-html'
+
+import '@material/mwc-icon'
+
+import { store } from '@things-factory/shell'
 import { UPDATE_PRINTER } from '@things-factory/print-base'
-
 import { APPEND_CONTEXT_TOOL, TOGGLE_OVERLAY, TOOL_POSITION } from '@things-factory/layout-base'
-
-import '@material/mwc-icon/mwc-icon'
 
 function toggleOverlayTemplate() {
   store.dispatch({

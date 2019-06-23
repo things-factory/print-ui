@@ -1,8 +1,8 @@
 import { css, html, LitElement } from 'lit-element'
 import { connect } from 'pwa-helpers/connect-mixin'
 
-import '@material/mwc-button/mwc-button'
-import '@material/mwc-icon/mwc-icon'
+import '@material/mwc-button'
+import '@material/mwc-icon'
 
 import { store, ScrollbarStyles } from '@things-factory/shell'
 import { TOGGLE_OVERLAY } from '@things-factory/layout-base'
