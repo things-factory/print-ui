@@ -25,7 +25,7 @@ class PrintContextUi extends connect(store)(LitElement) {
           display: flex;
           flex-direction: column;
           margin: auto 0 0 0;
-          max-height: 30vh;
+          max-height: 70vh;
           background-color: #cf4545;
         }
         ul {
