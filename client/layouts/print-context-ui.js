@@ -130,7 +130,7 @@ class PrintContextUi extends connect(store)(LitElement) {
       document.dispatchEvent(
         new CustomEvent('notify', {
           detail: {
-            type: 'info',
+            level: 'info',
             message: i18next.t('text.printed', {
               result
             })
@@ -141,7 +141,7 @@ class PrintContextUi extends connect(store)(LitElement) {
       document.dispatchEvent(
         new CustomEvent('notify', {
           detail: {
-            type: 'error',
+            level: 'error',
             message: e,
             e
           }
