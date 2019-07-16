@@ -23,7 +23,9 @@ export default function bootstrap() {
     tool: {
       position: TOOL_POSITION.FRONT,
       template: html`
-        <mwc-icon style="padding: 10px; background-color: #CF4545; color: white;" @click="${toggleOverlayTemplate}"
+        <mwc-icon
+          style="padding: 10px; background-color: var(--secondary-color); color: white;"
+          @click="${toggleOverlayTemplate}"
           >print</mwc-icon
         >
       `,

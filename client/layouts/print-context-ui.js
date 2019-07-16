@@ -22,36 +22,70 @@ class PrintContextUi extends connect(store)(LitElement) {
       ScrollbarStyles,
       css`
         :host {
-          display: flex;
-          flex-direction: column;
-          margin: auto 0 0 0;
+          min-width: 40vw;
+          position: absolute;
+          bottom: 0;
           max-height: 70vh;
-          background-color: #cf4545;
+
+          background-color: var(--context-ui-background-color);
+          box-shadow: var(--context-ui-box-shadow);
+          border-radius: var(--context-ui-border-radius);
+          padding: var(--context-ui-padding);
         }
         ul {
-          margin: 0;
+          margin: 0 0 9px 0;
           padding: 0;
-          color: #fff;
           list-style: none;
-          height: 100%;
           overflow-y: auto;
         }
         li {
           display: flex;
+
+          border-bottom: var(--context-ui-list-border-bottom);
+          padding: var(--context-ui-list-padding);
         }
         li > mwc-icon {
-          padding: 10px;
+          font-size: 1em;
+
+          padding: var(--context-ui-padding);
+          color: var(--context-ui-list-color);\
         }
         li > span {
           margin: auto 0 auto 0;
           flex: 1;
+          
+          color: var(--context-ui-list-color);
+        }
+        li:hover mwc-icon,
+        li:hover span {
+          color: #fff;
+        }
+        li:hover {
+          cursor: pointer;
+
+          border-bottom: var(--context-ui-list-border-hover-bottom);
         }
         li > input {
           margin: auto 10px;
         }
         mwc-button {
-          margin-right: auto;
-          padding: 0 10px;
+          float: right;
+          margin-right: 10px;
+          
+          color:var(--context-ui-button-color);
+          background-color: var(--context-ui-button-background-color);
+        }
+        mwc-button:hover {
+          color:var(--context-ui-button-hover-color);
+          background-color: var(--context-ui-button-background-hover-color);
+        }
+
+        @media (max-width: 400px) {
+          :host {
+            min-width: 100%;
+            box-shadow: none;
+            border-radius: 0;
+          }
         }
       `
     ]
