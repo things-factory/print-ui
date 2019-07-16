@@ -1,7 +1,6 @@
 import { css, html, LitElement } from 'lit-element'
 import { connect } from 'pwa-helpers/connect-mixin'
 
-import '@material/mwc-button'
 import '@material/mwc-icon'
 
 import { store, ScrollbarStyles } from '@things-factory/shell'
@@ -65,20 +64,6 @@ class PrintContextUi extends connect(store)(LitElement) {
 
           border-bottom: var(--context-ui-list-border-hover-bottom);
         }
-        li > input {
-          margin: auto 10px;
-        }
-        mwc-button {
-          float: right;
-          margin-right: 10px;
-          
-          color:var(--context-ui-button-color);
-          background-color: var(--context-ui-button-background-color);
-        }
-        mwc-button:hover {
-          color:var(--context-ui-button-hover-color);
-          background-color: var(--context-ui-button-background-hover-color);
-        }
 
         @media (max-width: 400px) {
           :host {
@@ -107,8 +92,6 @@ class PrintContextUi extends connect(store)(LitElement) {
       }
     })
 
-    this._printer = printers.length > 0 ? printers[0] : null
-
     return html`
       <ul>
         ${printers
@@ -118,24 +101,14 @@ class PrintContextUi extends connect(store)(LitElement) {
           .map(
             (printer, idx) => html`
               <label for="${idx}">
-                <li>
+                <li @click=${e => this._onPrintOut(printer)}>
                   <mwc-icon>print</mwc-icon>
                   <span>${printer.name} (${printer.type})</span>
-                  <input
-                    id="${idx}"
-                    type="radio"
-                    name="print"
-                    @change="${() => {
-                      this._printer = printer
-                    }}"
-                    ?checked="${idx === 0}"
-                  />
                 </li>
               </label>
             `
           )}
       </ul>
-      <mwc-button @click=${this._onPrintOut.bind(this)}>Print to...</mwc-button>
     `
   }
 
@@ -144,8 +117,8 @@ class PrintContextUi extends connect(store)(LitElement) {
     this._context = state.route.context
   }
 
-  async _onPrintOut(event) {
-    if (!this._printer) {
+  async _onPrintOut(printer) {
+    if (!printer) {
       return
     }
 
@@ -159,7 +132,7 @@ class PrintContextUi extends connect(store)(LitElement) {
     await this.updateComplete
 
     try {
-      var result = await print(this._printer, this._context.printable)
+      var result = await print(printer, this._context.printable)
 
       document.dispatchEvent(
         new CustomEvent('notify', {
