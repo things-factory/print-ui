@@ -4,28 +4,27 @@ import '@material/mwc-icon'
 
 import { store } from '@things-factory/shell'
 import { UPDATE_PRINTER } from '@things-factory/print-base'
-import { APPEND_CONTEXT_TOOL, TOGGLE_OVERLAY, TOOL_POSITION } from '@things-factory/layout-base'
-
-function toggleOverlayTemplate() {
-  store.dispatch({
-    type: TOGGLE_OVERLAY,
-    template: html`
-      <print-context-ui></print-context-ui>
-    `
-  })
-}
+import { TOOL_POSITION } from '@things-factory/layout-base'
+import { APPEND_CONTEXT_TOOL, SHOW_CONTEXT_OVERLAY } from '@things-factory/context-base'
 
 export default function bootstrap() {
   import('./layouts/print-context-ui')
+
+  function showOverlay() {
+    store.dispatch({
+      type: SHOW_CONTEXT_OVERLAY,
+      template: html`
+        <print-context-ui></print-context-ui>
+      `
+    })
+  }
 
   store.dispatch({
     type: APPEND_CONTEXT_TOOL,
     tool: {
       position: TOOL_POSITION.FRONT,
       template: html`
-        <mwc-icon
-          style="padding: 10px; background-color: var(--secondary-color); color: white;"
-          @click="${toggleOverlayTemplate}"
+        <mwc-icon style="padding: 10px; background-color: var(--secondary-color); color: white;" @click=${showOverlay}
           >print</mwc-icon
         >
       `,
