@@ -5,14 +5,14 @@ import '@material/mwc-icon'
 import { store } from '@things-factory/shell'
 import { UPDATE_PRINTER } from '@things-factory/print-base'
 import { TOOL_POSITION } from '@things-factory/layout-base'
-import { APPEND_CONTEXT_TOOL, SHOW_CONTEXT_OVERLAY } from '@things-factory/context-base'
+import { APPEND_CONTEXT_TOOL } from '@things-factory/context-base'
+import { toggleOverlay } from '@things-factory/layout-base'
 
 export default function bootstrap() {
   import('./layouts/print-context-ui')
 
-  function showOverlay() {
-    store.dispatch({
-      type: SHOW_CONTEXT_OVERLAY,
+  function toggleContextToolbarOverlay() {
+    toggleOverlay('context-toolbar-overlay', {
       template: html`
         <print-context-ui></print-context-ui>
       `
@@ -24,7 +24,9 @@ export default function bootstrap() {
     tool: {
       position: TOOL_POSITION.FRONT,
       template: html`
-        <mwc-icon style="padding: 10px; background-color: var(--secondary-color); color: white;" @click=${showOverlay}
+        <mwc-icon
+          style="padding: 10px; background-color: var(--secondary-color); color: white;"
+          @click=${toggleContextToolbarOverlay}
           >print</mwc-icon
         >
       `,

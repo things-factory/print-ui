@@ -4,9 +4,9 @@ import { connect } from 'pwa-helpers/connect-mixin'
 import '@material/mwc-icon'
 
 import { store, ScrollbarStyles } from '@things-factory/shell'
-import { HIDE_CONTEXT_OVERLAY } from '@things-factory/context-base'
 import { print } from '@things-factory/print-base'
 import { i18next } from '@things-factory/i18n-base'
+import { closeOverlay } from '@things-factory/layout-base'
 
 class PrintContextUi extends connect(store)(LitElement) {
   static get properties() {
@@ -128,9 +128,7 @@ class PrintContextUi extends connect(store)(LitElement) {
       return
     }
 
-    store.dispatch({
-      type: HIDE_CONTEXT_OVERLAY
-    })
+    closeOverlay('context-toolbar-overlay')
 
     /* TODO 실제 오버레이가 사라질 때를 확인하는 방법을 구하시오. */
     await this.updateComplete
