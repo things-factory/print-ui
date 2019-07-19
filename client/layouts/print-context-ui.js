@@ -49,18 +49,17 @@ class PrintContextUi extends connect(store)(LitElement) {
           font-size: 1em;
 
           padding: var(--context-ui-padding);
-          color: var(--context-ui-list-color);\
+          color: var(--context-ui-list-color);
         }
 
         li > span {
           margin: auto 0 auto 0;
           flex: 1;
-          
+
           color: var(--context-ui-list-color);
         }
 
         li:hover mwc-icon,
-
         li:hover span {
           color: #fff;
         }
