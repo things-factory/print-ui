@@ -10,7 +10,7 @@ import { closeOverlay } from '@things-factory/layout-base'
 
 import { ContextToolbarOverlayStyle } from '@things-factory/context-ui'
 
-class PrintContextUi extends connect(store)(LitElement) {
+class PrintContextTemplate extends connect(store)(LitElement) {
   static get properties() {
     return {
       _context: Object,
@@ -101,4 +101,4 @@ class PrintContextUi extends connect(store)(LitElement) {
   }
 }
 
-customElements.define('print-context-ui', PrintContextUi)
+customElements.define('print-context-template', PrintContextTemplate)

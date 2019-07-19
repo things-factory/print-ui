@@ -9,12 +9,12 @@ import { APPEND_CONTEXT_TOOL } from '@things-factory/context-base'
 import { openOverlay } from '@things-factory/layout-base'
 
 export default function bootstrap() {
-  import('./layouts/print-context-ui')
+  import('./templates/print-context-template')
 
   function openContextToolbarOverlay() {
     openOverlay('context-toolbar-overlay', {
       template: html`
-        <print-context-ui></print-context-ui>
+        <print-context-template></print-context-template>
       `
     })
   }
