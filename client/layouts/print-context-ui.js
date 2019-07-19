@@ -127,13 +127,6 @@ class PrintContextUi extends connect(store)(LitElement) {
       return
     }
 
-    closeOverlay('context-toolbar-overlay')
-
-    /* TODO 실제 오버레이가 사라질 때를 확인하는 방법을 구하시오. */
-    await this.updateComplete
-    await this.updateComplete
-    await this.updateComplete
-
     try {
       var result = await print(printer, this._context.printable)
 
@@ -158,6 +151,8 @@ class PrintContextUi extends connect(store)(LitElement) {
         })
       )
     }
+
+    closeOverlay('context-toolbar-overlay')
   }
 }
 

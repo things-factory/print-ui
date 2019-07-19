@@ -6,13 +6,13 @@ import { store } from '@things-factory/shell'
 import { UPDATE_PRINTER } from '@things-factory/print-base'
 import { TOOL_POSITION } from '@things-factory/layout-base'
 import { APPEND_CONTEXT_TOOL } from '@things-factory/context-base'
-import { toggleOverlay } from '@things-factory/layout-base'
+import { openOverlay } from '@things-factory/layout-base'
 
 export default function bootstrap() {
   import('./layouts/print-context-ui')
 
-  function toggleContextToolbarOverlay() {
-    toggleOverlay('context-toolbar-overlay', {
+  function openContextToolbarOverlay() {
+    openOverlay('context-toolbar-overlay', {
       template: html`
         <print-context-ui></print-context-ui>
       `
@@ -26,7 +26,7 @@ export default function bootstrap() {
       template: html`
         <mwc-icon
           style="padding: 10px; background-color: var(--secondary-color); color: white;"
-          @click=${toggleContextToolbarOverlay}
+          @click=${openContextToolbarOverlay}
           >print</mwc-icon
         >
       `,
