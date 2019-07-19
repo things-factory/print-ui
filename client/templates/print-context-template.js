@@ -6,7 +6,7 @@ import '@material/mwc-icon'
 import { store, ScrollbarStyles } from '@things-factory/shell'
 import { print } from '@things-factory/print-base'
 import { i18next } from '@things-factory/i18n-base'
-import { closeOverlay } from '@things-factory/layout-base'
+import { closeOverlay, UPDATE_LAYOUT_VIEWPART } from '@things-factory/layout-base'
 
 import { ContextToolbarOverlayStyle } from '@things-factory/context-ui'
 
@@ -67,6 +67,22 @@ class PrintContextTemplate extends connect(store)(LitElement) {
     if (!printer) {
       return
     }
+
+    /*
+     * FIXME print 시작하기 전에 처리하고 싶지만, print preview가 blocking 되는 이유 때문인지,
+     * 프린트 전에 closeOverlay한 경우에는 사라지지 않는다.
+     * 따라서, 미리 강제로 overlay를 hide시키고, 이후에 overlay를 close 한다.
+     */
+
+    store.dispatch({
+      type: UPDATE_LAYOUT_VIEWPART,
+      name: 'context-toolbar-overlay',
+      overide: {
+        show: false
+      }
+    })
+
+    await this.updateComplete
 
     try {
       var result = await print(printer, this._context.printable)
