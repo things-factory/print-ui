@@ -8,6 +8,8 @@ import { print } from '@things-factory/print-base'
 import { i18next } from '@things-factory/i18n-base'
 import { closeOverlay } from '@things-factory/layout-base'
 
+import { ContextToolbarOverlayStyle } from '@things-factory/context-ui'
+
 class PrintContextUi extends connect(store)(LitElement) {
   static get properties() {
     return {
@@ -17,68 +19,7 @@ class PrintContextUi extends connect(store)(LitElement) {
   }
 
   static get styles() {
-    return [
-      ScrollbarStyles,
-      css`
-        :host {
-          display: block;
-
-          min-width: 40vw;
-
-          background-color: var(--context-ui-background-color);
-          box-shadow: var(--context-ui-box-shadow);
-          border-radius: var(--context-ui-border-radius);
-          padding: var(--context-ui-padding);
-        }
-
-        ul {
-          margin: 0 0 9px 0;
-          padding: 0;
-          list-style: none;
-          overflow-y: auto;
-        }
-
-        li {
-          display: flex;
-
-          border-bottom: var(--context-ui-list-border-bottom);
-          padding: var(--context-ui-list-padding);
-        }
-
-        li > mwc-icon {
-          font-size: 1em;
-
-          padding: var(--context-ui-padding);
-          color: var(--context-ui-list-color);
-        }
-
-        li > span {
-          margin: auto 0 auto 0;
-          flex: 1;
-
-          color: var(--context-ui-list-color);
-        }
-
-        li:hover mwc-icon,
-        li:hover span {
-          color: #fff;
-        }
-
-        li:hover {
-          cursor: pointer;
-
-          border-bottom: var(--context-ui-list-border-hover-bottom);
-        }
-
-        @media (max-width: 400px) {
-          :host {
-            min-width: 100%;
-            box-shadow: none;
-            border-radius: 0;
-          }
-        }
-      `
-    ]
+    return [ScrollbarStyles, ContextToolbarOverlayStyle]
   }
 
   render() {
@@ -152,6 +93,10 @@ class PrintContextUi extends connect(store)(LitElement) {
       )
     }
 
+    /*
+     * FIXME print 시작하기 전에 처리하고 싶지만, print preview가 blocking 되는 이유 때문인지,
+     * 프린트 전에 closeOverlay한 경우에는 사라지지 않는다.
+     */
     closeOverlay('context-toolbar-overlay')
   }
 }
