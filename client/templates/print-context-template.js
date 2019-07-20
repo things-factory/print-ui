@@ -6,7 +6,7 @@ import '@material/mwc-icon'
 import { store, ScrollbarStyles } from '@things-factory/shell'
 import { print } from '@things-factory/print-base'
 import { i18next } from '@things-factory/i18n-base'
-import { UPDATE_LAYOUT_VIEWPART } from '@things-factory/layout-base'
+import { UPDATE_VIEWPART } from '@things-factory/layout-base'
 
 import { ContextToolbarOverlayStyle } from '@things-factory/context-ui'
 
@@ -75,7 +75,7 @@ class PrintContextTemplate extends connect(store)(LitElement) {
      */
 
     store.dispatch({
-      type: UPDATE_LAYOUT_VIEWPART,
+      type: UPDATE_VIEWPART,
       name: 'context-toolbar-overlay',
       overide: {
         show: false
