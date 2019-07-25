@@ -77,7 +77,7 @@ class PrintContextTemplate extends connect(store)(LitElement) {
     store.dispatch({
       type: UPDATE_VIEWPART,
       name: 'context-toolbar-overlay',
-      overide: {
+      override: {
         show: false
       }
     })
