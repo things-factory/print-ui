@@ -19,7 +19,15 @@ class PrintContextTemplate extends connect(store)(LitElement) {
   }
 
   static get styles() {
-    return [ScrollbarStyles, ContextToolbarOverlayStyle]
+    return [
+      ScrollbarStyles,
+      ContextToolbarOverlayStyle,
+      css`
+        :host {
+          min-height: 200px;
+        }
+      `
+    ]
   }
 
   render() {
@@ -40,20 +48,24 @@ class PrintContextTemplate extends connect(store)(LitElement) {
 
     return html`
       <ul>
-        ${printers
-          .sort((p1, p2) => {
-            p1.name > p2.name ? 1 : 0
-          })
-          .map(
-            (printer, idx) => html`
-              <label for="${idx}">
-                <li @click=${e => this._onPrintOut(printer)}>
-                  <mwc-icon>print</mwc-icon>
-                  <span>${printer.name} (${printer.type})</span>
-                </li>
-              </label>
+        ${!printers || printers.length == 0
+          ? html`
+              <div>No printer is found.</div>
             `
-          )}
+          : printers
+              .sort((p1, p2) => {
+                p1.name > p2.name ? 1 : 0
+              })
+              .map(
+                (printer, idx) => html`
+                  <label for="${idx}">
+                    <li @click=${e => this._onPrintOut(printer)}>
+                      <mwc-icon>print</mwc-icon>
+                      <span>${printer.name} (${printer.type})</span>
+                    </li>
+                  </label>
+                `
+              )}
       </ul>
     `
   }
