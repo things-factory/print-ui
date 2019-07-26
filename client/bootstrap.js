@@ -19,6 +19,12 @@ export default function bootstrap() {
     })
   }
 
+  async function fetchPrinters() {
+    var response = await fetch('/printers')
+    var json = await response.json()
+    return json.printers
+  }
+
   store.dispatch({
     type: APPEND_CONTEXT_TOOL,
     tool: {
@@ -26,7 +32,15 @@ export default function bootstrap() {
       template: html`
         <mwc-icon
           style="padding: 10px; background-color: var(--secondary-color); color: white;"
-          @click=${openContextToolbarOverlay}
+          @click=${async e => {
+            openContextToolbarOverlay(e)
+            var printers = await fetchPrinters()
+
+            store.dispatch({
+              type: UPDATE_PRINTER,
+              printer: printers
+            })
+          }}
           >print</mwc-icon
         >
       `,
@@ -35,29 +49,29 @@ export default function bootstrap() {
   })
 
   /* TODO move to test module */
-  store.dispatch({
-    type: UPDATE_PRINTER,
-    printer: [
-      {
-        type: 'paper',
-        name: 'HP DesignJet 60 Z6610'
-      },
-      {
-        type: 'paper',
-        name: 'CANON IR ADV C5550i II'
-      },
-      {
-        type: 'paper',
-        name: 'EPSON aculaser-C9300N A3'
-      },
-      {
-        type: 'label',
-        name: 'Zebra ZT800-EPL'
-      },
-      {
-        type: '3d',
-        name: '3D Printer XYZ'
-      }
-    ]
-  })
+  //   store.dispatch({
+  //     type: UPDATE_PRINTER,
+  //     printer: [
+  //       {
+  //         type: 'paper',
+  //         name: 'HP DesignJet 60 Z6610'
+  //       },
+  //       {
+  //         type: 'paper',
+  //         name: 'CANON IR ADV C5550i II'
+  //       },
+  //       {
+  //         type: 'paper',
+  //         name: 'EPSON aculaser-C9300N A3'
+  //       },
+  //       {
+  //         type: 'label',
+  //         name: 'Zebra ZT800-EPL'
+  //       },
+  //       {
+  //         type: '3d',
+  //         name: '3D Printer XYZ'
+  //       }
+  //     ]
+  //   })
 }
