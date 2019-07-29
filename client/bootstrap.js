@@ -31,7 +31,6 @@ export default function bootstrap() {
       position: TOOL_POSITION.FRONT,
       template: html`
         <mwc-icon
-          style="padding: 10px; background-color: var(--secondary-color); color: white;"
           @click=${async e => {
             openContextToolbarOverlay(e)
             var printers = await fetchPrinters()
