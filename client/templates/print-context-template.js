@@ -89,6 +89,12 @@ class PrintContextTemplate extends connect(store)(LitElement) {
      * 따라서, 미리 강제로 overlay를 hide시키고, 이후에 overlay를 close 한다.
      */
 
+    var printerObject = {
+      ...printer
+    }
+
+    printerObject.name = printer.txt.name
+
     store.dispatch({
       type: UPDATE_VIEWPART,
       name: 'context-toolbar-overlay',
@@ -100,7 +106,7 @@ class PrintContextTemplate extends connect(store)(LitElement) {
     await this.updateComplete
 
     try {
-      var result = await print(printer, this._context.printable)
+      var result = await print(printerObject, this._context.printable)
 
       document.dispatchEvent(
         new CustomEvent('notify', {
