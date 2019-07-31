@@ -46,31 +46,4 @@ export default function bootstrap() {
       context: 'printable'
     }
   })
-
-  /* TODO move to test module */
-  //   store.dispatch({
-  //     type: UPDATE_PRINTER,
-  //     printer: [
-  //       {
-  //         type: 'paper',
-  //         name: 'HP DesignJet 60 Z6610'
-  //       },
-  //       {
-  //         type: 'paper',
-  //         name: 'CANON IR ADV C5550i II'
-  //       },
-  //       {
-  //         type: 'paper',
-  //         name: 'EPSON aculaser-C9300N A3'
-  //       },
-  //       {
-  //         type: 'label',
-  //         name: 'Zebra ZT800-EPL'
-  //       },
-  //       {
-  //         type: '3d',
-  //         name: '3D Printer XYZ'
-  //       }
-  //     ]
-  //   })
 }
