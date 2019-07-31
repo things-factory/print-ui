@@ -92,7 +92,7 @@ class PrintContextTemplate extends connect(store)(LitElement) {
       ...printer
     }
 
-    printerObject.name = printer.txt.name
+    printerObject.name = printer.txtRecord.name
 
     store.dispatch({
       type: UPDATE_VIEWPART,
