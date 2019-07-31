@@ -3,7 +3,7 @@ import { connect } from 'pwa-helpers/connect-mixin'
 
 import '@material/mwc-icon'
 
-import { store, ScrollbarStyles } from '@things-factory/shell'
+import { store } from '@things-factory/shell'
 import { print } from '@things-factory/print-base'
 import { i18next } from '@things-factory/i18n-base'
 import { UPDATE_VIEWPART } from '@things-factory/layout-base'
@@ -20,7 +20,6 @@ class PrintContextTemplate extends connect(store)(LitElement) {
 
   static get styles() {
     return [
-      ScrollbarStyles,
       ContextToolbarOverlayStyle,
       css`
         :host {
