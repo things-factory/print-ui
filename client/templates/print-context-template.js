@@ -24,6 +24,7 @@ class PrintContextTemplate extends connect(store)(LitElement) {
       css`
         :host {
           min-height: 200px;
+          max-height: 70vh;
         }
       `
     ]
