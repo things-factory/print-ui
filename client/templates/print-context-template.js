@@ -49,6 +49,12 @@ class PrintContextTemplate extends connect(store)(LitElement) {
       // }
     })
 
+    this._staticPrinters.forEach(printer => {
+      if (!accept || accept.indexOf(printer.type) != -1) {
+        printers.push(printer)
+      }
+    })
+
     return html`
       <ul>
         ${!printers || printers.length == 0
@@ -75,6 +81,7 @@ class PrintContextTemplate extends connect(store)(LitElement) {
 
   stateChanged(state) {
     this._printers = state.print.printers
+    this._staticPrinters = state.print.staticPrinters
     this._context = state.route.context
   }
 
@@ -93,7 +100,7 @@ class PrintContextTemplate extends connect(store)(LitElement) {
       ...printer
     }
 
-    printerObject.name = printer.txtRecord.name
+    printerObject.name = printer.txtRecord ? printer.txtRecord.name : printer.name
 
     store.dispatch({
       type: UPDATE_VIEWPART,
