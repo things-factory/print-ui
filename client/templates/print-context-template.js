@@ -19,15 +19,7 @@ class PrintContextTemplate extends connect(store)(LitElement) {
   }
 
   static get styles() {
-    return [
-      ContextToolbarOverlayStyle,
-      css`
-        :host {
-          min-height: 200px;
-          max-height: 70vh;
-        }
-      `
-    ]
+    return [ContextToolbarOverlayStyle]
   }
 
   render() {
