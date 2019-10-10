@@ -33,12 +33,9 @@ class PrintContextTemplate extends connect(store)(LitElement) {
         : null
 
     this._printers.forEach(printer => {
-      // if (!accept || accept.indexOf(printer.type) != -1) {
-      printers.push({
-        ...printer,
-        type: 'label'
-      })
-      // }
+      if (!accept || accept.indexOf(printer.type) != -1) {
+        printers.push(printer)
+      }
     })
 
     this._staticPrinters.forEach(printer => {
