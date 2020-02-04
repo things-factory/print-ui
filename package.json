@@ -26,8 +26,7 @@
     "@things-factory/context-ui": "^2.0.0",
     "@things-factory/i18n-base": "^2.0.0",
     "@things-factory/layout-base": "^2.0.0",
-    "@things-factory/print-base": "^2.0.0",
-    "@things-factory/shell": "^2.0.0"
+    "@things-factory/print-base": "^2.0.0"
   },
   "devDependencies": {
     "@things-factory/tester": "^2.0.0"
